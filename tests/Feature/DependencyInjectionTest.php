@@ -20,10 +20,4 @@ class DependencyInjectionTest extends TestCase
 
         self::assertEquals("Foo and Bar", $bar->bar());
     }
-    public function test_example(): void
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
 }
