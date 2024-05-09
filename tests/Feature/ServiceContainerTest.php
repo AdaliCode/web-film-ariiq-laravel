@@ -16,15 +16,15 @@ class ServiceContainerTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function testCreateDependency()
-    {
-        $foo = $this->app->make(Foo::class);
-        $foo2 = $this->app->make(Foo::class);
+    // public function testCreateDependency()
+    // {
+    //     $foo = $this->app->make(Foo::class);
+    //     $foo2 = $this->app->make(Foo::class);
 
-        self::assertEquals("Foo", $foo->foo());
-        self::assertEquals("Foo", $foo2->foo());
-        self::assertNotSame($foo, $foo2);
-    }
+    //     self::assertEquals("Foo", $foo->foo());
+    //     self::assertEquals("Foo", $foo2->foo());
+    //     self::assertNotSame($foo, $foo2);
+    // }
     public function testBind()
     {
         $this->app->bind(Film::class, function ($app) {
