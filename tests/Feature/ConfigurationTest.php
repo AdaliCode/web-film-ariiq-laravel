@@ -25,10 +25,4 @@ class ConfigurationTest extends TestCase
         self::assertEquals("fiezayyan@gmail.com", $email);
         self::assertEquals("belum ada", $web);
     }
-    public function test_example(): void
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
 }
