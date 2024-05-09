@@ -1,0 +1,31 @@
+/* before do css, delete cache from browser */
+
+h1,
+p,
+span,
+.navbar-brand {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+h1,
+.navbar-brand {
+    font-size: 3vw;
+}
+
+.navbar-brand {
+    color: red;
+    text-decoration: underline;
+}
+#korean-drama-cover span {
+    font-size: 1.5vw;
+}
+#korean-drama-cover span:hover {
+    color: red;
+}
+#korean-drama-cover img:hover {
+    filter: blur(2px);
+}
+#korean-drama-cover p {
+    font-size: 1vw;
+    font-style: italic;
+}

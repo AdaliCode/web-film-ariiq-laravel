@@ -40,4 +40,21 @@ class RoutingTest extends TestCase
         $this->view('film.detail', ['title' => 'Exhuma'])
             ->assertSeeText('Exhuma');
     }
+
+    public function testRouteParameter()
+    {
+        $this->get('/movie/exhuma')
+            ->assertSeeText("Judul Film : exhuma");
+    }
+
+    public function testRouteParameterRegex()
+    {
+        $this->get('/tvseries/12345')->assertSeeText("Judul TV Series : 12345");
+        $this->get('/tvseries/salah')->assertSeeText("404");
+    }
+    public function testRouteOptionalParameter()
+    {
+        $this->get('/anime/12345')->assertSeeText("Anime : 12345");
+        $this->get('/anime/')->assertSeeText("Anime : 404");
+    }
 }
