@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('../layout.main')
 @section('title', "AFLIX | $title")
 @section('container')
   <div class="row" id="info-video">

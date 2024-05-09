@@ -8,15 +8,13 @@ use Tests\TestCase;
 
 class RoutingTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
-    public function testBasicRouting()
-    {
-        $this->get('/login')
-            ->assertStatus(200)
-            ->assertSeeText("Ini adalah halaman Login");
-    }
+    // this comment not mean for deleting
+    // public function testBasicRouting()
+    // {
+    //     $this->get('/login')
+    //         ->assertStatus(200)
+    //         ->assertSeeText("Ini adalah halaman Login");
+    // }
 
     public function testRedirect()
     {
@@ -56,5 +54,11 @@ class RoutingTest extends TestCase
     {
         $this->get('/anime/12345')->assertSeeText("Anime : 12345");
         $this->get('/anime/')->assertSeeText("Anime : 404");
+    }
+
+    public function testNamed()
+    {
+        $this->get('/film/12345')->assertSeeText("movie/12345");
+        $this->get('/film-redirect/12345')->assertRedirect("movie/12345");
     }
 }
