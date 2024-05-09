@@ -3,16 +3,12 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
-Route::get('/detail', function () {
-    return "Ini adalah halaman Detail";
-});
+Route::view('/detail', 'film.detail', ['title' => 'Exhuma']);
+Route::view('/register', 'register');
 Route::get('/login', function () {
     return "Ini adalah halaman Login";
-});
-Route::get('/register', function () {
-    return "Ini adalah halaman Register";
 });
 
 Route::redirect('/add', '/login'); // from, to

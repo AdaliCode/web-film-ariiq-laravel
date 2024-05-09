@@ -28,4 +28,16 @@ class RoutingTest extends TestCase
         $this->get("/404")
             ->assertSeeText("404");
     }
+
+    public function testViewOrViewNested()
+    {
+        $this->get("/detail")
+            ->assertSeeText("Exhuma");
+    }
+
+    public function testViewWithoutRoute()
+    {
+        $this->view('film.detail', ['title' => 'Exhuma'])
+            ->assertSeeText('Exhuma');
+    }
 }
