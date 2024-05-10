@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home');
-Route::view('/detail', 'film.detail', ['title' => 'Exhuma']);
 Route::view('/register', 'register');
+// Route::get('/controller/register', [RegisterController::class, 'hello']);
+Route::get('/controller/register/{name}', [RegisterController::class, 'hello']);
 Route::view('/login', 'login');
+Route::view('/detail', 'film.detail', ['title' => 'Exhuma']);
 Route::get('/movie/{movie}', function ($movieTittle) {
     return " Judul Film : $movieTittle";
 })->name('movie.detail');

@@ -1,7 +1,6 @@
 @extends('layout.main')
 @section('title', "AFLIX")
 @section('container')
-<div class="container py-5">
     <div class="row" id="korean-drama-cover">
         <h1 class="text-uppercase">DRAMA KOREA</h1>
         {{-- <?php foreach ($data['data_video_streaming'] as $key => $dvs) : ?>
@@ -17,6 +16,5 @@
     </div>
     <h1 class="text-uppercase">Anime</h1>
     <h1 class="text-uppercase">Variety Show</h1>
-</div>
 {{-- <script src="<?= BASEURL; ?>/js/script.js"></script> --}}
 @endsection

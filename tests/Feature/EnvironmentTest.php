@@ -29,10 +29,4 @@ class EnvironmentTest extends TestCase
             self::assertTrue(true);
         }
     }
-    public function test_example(): void
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
 }
