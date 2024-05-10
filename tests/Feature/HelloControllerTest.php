@@ -54,4 +54,44 @@ class HelloControllerTest extends TestCase
             ]
         ])->assertSeeText('Exhuma')->assertSeeText('Abigail');
     }
+
+    public function testInputType()
+    {
+        $this->post('input/type', [
+            'name' => 'Ariiq',
+            'married' => 'false',
+            'birth_Date' => '2000-07-19'
+        ])->assertSeeText('Ariiq')->assertSeeText('false')->assertSeeText('2000-07-19');
+    }
+    public function testFilterOnly()
+    {
+        $this->post('input/filter/only', [
+            'name' => [
+                'first' => "Muhammad",
+                'middle' => 'Ariiq',
+                'last' => 'Fiezayyan'
+            ]
+        ])->assertSeeText('Muhammad')->assertSeeText('Fiezayyan')
+            ->assertDontSeeText('Ariiq');
+    }
+    public function testFilterExcept()
+    {
+        $this->post('input/filter/except', [
+            'username' => "Ariiq",
+            'admin' => 'true',
+            'password' => 'Fiezayyan'
+
+        ])->assertSeeText('Ariiq')->assertSeeText('Fiezayyan')
+            ->assertDontSeeText('admin');
+    }
+    public function testFilterMerge()
+    {
+        $this->post('input/filter/merge', [
+            'username' => "Ariiq",
+            'admin' => 'true',
+            'password' => 'Fiezayyan'
+
+        ])->assertSeeText('Ariiq')->assertSeeText('Fiezayyan')
+            ->assertSeeText('admin')->assertSeeText('false');
+    }
 }
