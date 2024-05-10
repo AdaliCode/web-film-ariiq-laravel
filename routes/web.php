@@ -1,12 +1,19 @@
 <?php
 
+use App\Http\Controllers\InputController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home');
 Route::view('/register', 'register');
 // Route::get('/controller/register', [RegisterController::class, 'hello']);
+Route::get('/controller/register/request', [RegisterController::class, 'request']);
 Route::get('/controller/register/{name}', [RegisterController::class, 'hello']);
+Route::get('/input/hello', [InputController::class, 'hello']);
+Route::post('/input/hello', [InputController::class, 'hello']);
+Route::post('/input/hello/first', [InputController::class, 'helloFirst']);
+Route::post('/input/hello/input', [InputController::class, 'helloInput']);
+Route::post('/input/hello/array', [InputController::class, 'arrayInput']);
 Route::view('/login', 'login');
 Route::view('/detail', 'film.detail', ['title' => 'Exhuma']);
 Route::get('/movie/{movie}', function ($movieTittle) {
