@@ -6,7 +6,7 @@
         <div class="card p-3">
             <div class="card-body">
                 <h1 class="text-center">Halaman Login</h1>
-                <form action="login" method="post">
+                <form action="/login" method="post">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control border border-dark" name="username" id="username">
@@ -20,6 +20,7 @@
                         <label class="form-check-label" for="remember">Remember Me</label>
                     </div>
                     <button type="submit" name="login" class="btn btn-primary">Login</button>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 </form>
                 <p class="mt-3">Belum Login? <a href="register">Registrasi</a> atuh!</p>
             </div>

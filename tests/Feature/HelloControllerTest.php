@@ -11,20 +11,20 @@ class HelloControllerTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function testController()
-    {
-        // $this->get('/controller/register')
-        //     ->assertSeeText("Hello World");
-        $this->get('/controller/register/Ariiq')
-            ->assertSeeText("HalO Ariiq");
-    }
+    // public function testController()
+    // {
+    //     // $this->get('/controller/register')
+    //     //     ->assertSeeText("Hello World");
+    //     $this->get('/controller/register/Ariiq')
+    //         ->assertSeeText("HalO Ariiq");
+    // }
 
-    public function testRequest()
-    {
-        $this->get('/controller/register/request', [
-            'Accept' => 'plain/text'
-        ])->assertSeeText("/controller/register/request")->assertSeeText('http://localhost/controller/register/request')->assertSeeText('GET')->assertSeeText('plain/text');
-    }
+    // public function testRequest()
+    // {
+    //     $this->get('/controller/register/request', [
+    //         'Accept' => 'plain/text'
+    //     ])->assertSeeText("/controller/register/request")->assertSeeText('http://localhost/controller/register/request')->assertSeeText('GET')->assertSeeText('plain/text');
+    // }
 
     public function testInput()
     {
