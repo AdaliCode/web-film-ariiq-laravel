@@ -5,6 +5,7 @@ namespace Tests\Feature;
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -36,5 +37,31 @@ class ExampleTest extends TestCase
         $this->post('/file/upload', [
             'picture' => $image
         ])->assertSeeText("OK : ariiq.png");
+    }
+    // Encryption
+    public function testEncrypt()
+    {
+        $encrypt = Crypt::encrypt('Ariiq Fiezayyan');
+        $decrypt = Crypt::decrypt($encrypt);
+
+        self::assertEquals('Ariiq Fiezayyan', $decrypt);
+    }
+
+    // cookie
+    public function testCreateCookie()
+    {
+        $this->get('/cookie/set')
+            ->assertCookie('User-Id', 'ariiq')
+            ->assertCookie('Is-Member', 'true');
+    }
+    public function testGetCookie()
+    {
+        $this->withCookie('User-Id', 'ariiq')
+            ->withCookie('Is-Member', 'true')
+            ->get('/cookie/get')
+            ->assertJson([
+                'userId' => 'ariiq',
+                'isMember' => 'true'
+            ]);
     }
 }

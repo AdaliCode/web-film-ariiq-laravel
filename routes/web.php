@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CookieController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\RegisterController;
@@ -27,6 +28,9 @@ Route::get('/response/type/view', [ResponseController::class, 'responseView']);
 Route::get('/response/type/json', [ResponseController::class, 'responseJson']);
 Route::get('/response/type/file', [ResponseController::class, 'responseFile']);
 Route::get('/response/type/download', [ResponseController::class, 'responseDownload']);
+Route::get('/cookie/set', [CookieController::class, 'createCookie']);
+Route::get('/cookie/get', [CookieController::class, 'getCookie']);
+Route::get('/cookie/clear', [CookieController::class, 'clearCookie']);
 Route::view('/login', 'login');
 Route::view('/detail', 'film.detail', ['title' => 'Exhuma']);
 Route::get('/movie/{movie}', function ($movieTittle) {
