@@ -1,19 +1,47 @@
 <?php
 
+use App\Exceptions\ValidationException;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Routing\RouteRegistrar;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 Route::view('/', 'home');
 Route::get('/register', [FormController::class, 'register']);
 Route::post('/register', [FormController::class, 'submitRegister']);
 Route::get('/login', [FormController::class, 'login']);
 Route::post('/login', [FormController::class, 'submitLogin']);
+
+Route::get('/url/current', function () {
+    return URL::full();
+});
+Route::get('/url/named', function () {
+    return route('redirect-hello', ['name' => 'Ariiq']);
+});
+Route::get('/url/action', function () {
+    return action([FormController::class, 'register'], []);
+});
+
+Route::get('/session/create', [SessionController::class, 'createSession']);
+Route::get('/session/get', [SessionController::class, 'getSession']);
+Route::get('/error/sample', function () {
+    throw new Exception("Sample Error");
+});
+Route::get('/error/manual', function () {
+    report(new Exception('Sample Error'));
+    return "OK";
+});
+Route::get('/error/validation', function () {
+    throw new ValidationException("
+    Validation Error");
+});
 
 Route::controller(InputController::class)->prefix('/input')->group(function () {
     Route::get('/hello', 'hello');

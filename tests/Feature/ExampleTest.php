@@ -64,4 +64,38 @@ class ExampleTest extends TestCase
                 'isMember' => 'true'
             ]);
     }
+
+    // URL
+    public function testCurrent()
+    {
+        $this->get('/url/current?name=Ariiq')
+            ->assertSeeText('/url/current?name=Ariiq');
+    }
+    public function testNamed()
+    {
+        $this->get('/url/named')
+            ->assertSeeText('/redirect/name/Ariiq');
+    }
+    public function testAction()
+    {
+        $this->get('/url/action')
+            ->assertSeeText('/register');
+    }
+
+    // Session
+    public function testCreateSession()
+    {
+        $this->get('/session/create')
+            ->assertSeeText('OK')
+            ->assertSessionHas('userId', 'ariiq')
+            ->assertSessionHas('isMember', 'true');
+    }
+    public function testGetSession()
+    {
+        $this->withSession([
+            'userId' => 'ariiq',
+            'isMember' => 'true'
+        ])->get('/session/get')
+            ->assertSeeText('ariiq')->assertSeeText('true');
+    }
 }
