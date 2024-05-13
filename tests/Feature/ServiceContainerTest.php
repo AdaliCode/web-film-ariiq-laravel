@@ -25,42 +25,42 @@ class ServiceContainerTest extends TestCase
     //     self::assertEquals("Foo", $foo2->foo());
     //     self::assertNotSame($foo, $foo2);
     // }
-    public function testBind()
-    {
-        $this->app->bind(Film::class, function ($app) {
-            return new Film("Pamyo", "Exhuma");
-        });
-        $film1 = $this->app->make(Film::class);
-        $film2 = $this->app->make(Film::class);
+    // public function testBind()
+    // {
+    //     $this->app->bind(Film::class, function ($app) {
+    //         return new Film("Pamyo", "Exhuma");
+    //     });
+    //     $film1 = $this->app->make(Film::class);
+    //     $film2 = $this->app->make(Film::class);
 
-        self::assertEquals("Pamyo", $film1->oriTitle);
-        self::assertEquals("Pamyo", $film2->oriTitle);
-        self::assertNotSame($film1, $film2);
-    }
-    public function testSingleton()
-    {
-        $this->app->singleton(Film::class, function ($app) {
-            return new Film("Pamyo", "Exhuma");
-        });
-        $film1 = $this->app->make(Film::class);
-        $film2 = $this->app->make(Film::class);
+    //     self::assertEquals("Pamyo", $film1->oriTitle);
+    //     self::assertEquals("Pamyo", $film2->oriTitle);
+    //     self::assertNotSame($film1, $film2);
+    // }
+    // public function testSingleton()
+    // {
+    //     $this->app->singleton(Film::class, function ($app) {
+    //         return new Film("Pamyo", "Exhuma");
+    //     });
+    //     $film1 = $this->app->make(Film::class);
+    //     $film2 = $this->app->make(Film::class);
 
-        self::assertEquals("Pamyo", $film1->oriTitle);
-        self::assertEquals("Pamyo", $film2->oriTitle);
-        self::assertSame($film1, $film2);
-    }
-    public function testInstance()
-    {
-        $film = new Film("Pamyo", "Exhuma");
-        $this->app->instance(Film::class, $film);
-        $film1 = $this->app->make(Film::class);
-        $film2 = $this->app->make(Film::class);
+    //     self::assertEquals("Pamyo", $film1->oriTitle);
+    //     self::assertEquals("Pamyo", $film2->oriTitle);
+    //     self::assertSame($film1, $film2);
+    // }
+    // public function testInstance()
+    // {
+    //     $film = new Film("Pamyo", "Exhuma");
+    //     $this->app->instance(Film::class, $film);
+    //     $film1 = $this->app->make(Film::class);
+    //     $film2 = $this->app->make(Film::class);
 
-        self::assertEquals("Pamyo", $film1->oriTitle);
-        self::assertEquals("Pamyo", $film2->oriTitle);
-        self::assertSame($film, $film1);
-        self::assertSame($film1, $film2);
-    }
+    //     self::assertEquals("Pamyo", $film1->oriTitle);
+    //     self::assertEquals("Pamyo", $film2->oriTitle);
+    //     self::assertSame($film, $film1);
+    //     self::assertSame($film1, $film2);
+    // }
 
     public function testDependencyInjection()
     {

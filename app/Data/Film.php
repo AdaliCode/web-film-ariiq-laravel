@@ -4,7 +4,9 @@ namespace App\Data;
 
 class Film
 {
-    public function __construct(public string $oriTitle, public string $englishTitle)
+    var string $title;
+    public function __construct(string $title)
     {
+        $this->title = $title;
     }
 }

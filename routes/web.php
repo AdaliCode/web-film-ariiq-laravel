@@ -13,7 +13,33 @@ use Illuminate\Routing\RouteRegistrar;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 
-Route::view('/', 'home');
+
+$movieCollection = collect([
+    [
+        "title" => "Exhuma",
+        "type" => "Film",
+        "genres" => ["Horror", "Mystery", "Thriller"]
+    ],
+    [
+        "title" => "Ghostbusters: Frozen Empire",
+        "type" => "Film",
+        "genres" => ["Adventure", "Comedy", "Fantasy"]
+    ],
+    [
+        "title" => "Hangout with Yoo",
+        "type" => "Variety Show",
+        "genres" => "Reality"
+    ]
+    // [
+    //     "title" => "Siksa Kubur",
+    //     "type" => "Film"
+    // ],
+]);
+// bagi berdasar type
+$result = $movieCollection->mapToGroups(function ($item) {
+    return [$item["type"] => ["title" => $item["title"], "genres" => $item["genres"]]];
+});
+Route::view('/', 'home', ['movieCollection' => $result]);
 Route::get('/register', [FormController::class, 'register']);
 Route::post('/register', [FormController::class, 'submitRegister']);
 Route::get('/login', [FormController::class, 'login']);
