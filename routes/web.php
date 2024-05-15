@@ -10,35 +10,54 @@ use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\RouteRegistrar;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 
 
-$movieCollection = collect([
-    [
-        "title" => "Exhuma",
-        "type" => "Film",
-        "genres" => ["Horror", "Mystery", "Thriller"]
-    ],
-    [
-        "title" => "Ghostbusters: Frozen Empire",
-        "type" => "Film",
-        "genres" => ["Adventure", "Comedy", "Fantasy"]
-    ],
-    [
-        "title" => "Hangout with Yoo",
-        "type" => "Variety Show",
-        "genres" => "Reality"
-    ]
-    // [
-    //     "title" => "Siksa Kubur",
-    //     "type" => "Film"
-    // ],
-]);
-// bagi berdasar type
-$result = $movieCollection->mapToGroups(function ($item) {
-    return [$item["type"] => ["title" => $item["title"], "genres" => $item["genres"]]];
+// $movieCollection = collect([
+//     [
+//         "title" => "Exhuma",
+//         "type" => "Film",
+//         "genres" => ["Horror", "Mystery", "Thriller"]
+//     ],
+//     [
+//         "title" => "Ghostbusters: Frozen Empire",
+//         "type" => "Film",
+//         "genres" => ["Adventure", "Comedy", "Fantasy"]
+//     ],
+//     [
+//         "title" => "Hangout with Yoo",
+//         "type" => "Variety Show",
+//         "genres" => "Reality"
+//     ]
+//     // [
+//     //     "title" => "Siksa Kubur",
+//     //     "type" => "Film"
+//     // ],
+// ]);
+$collection = DB::table('movies')
+    ->join('categories', 'movies.category_id', '=', 'categories.id')
+    ->select('movies.id', 'movies.title', 'categories.name as category_name', 'movies.price')->get();
+$result = $collection->mapToGroups(function ($item) {
+    return [$item->category_name => ["title" => $item->title]];
 });
+// Route::get('/coba', function () {
+//     $collection = DB::table('movies')
+//         ->join('categories', 'movies.category_id', '=', 'categories.id')
+//         ->select('movies.id', 'movies.title', 'categories.name as category_name', 'movies.price')
+//         ->groupBy('movies.category_id')
+//         ->get();
+//     return var_dump($collection[0]->category_name);
+// });
+// $collection = DB::table('movies')
+//     ->join('categories', 'movies.category_id', '=', 'categories.id')
+//     ->select('movies.id', 'movies.title', 'categories.name as category_name', 'movies.price')
+//     ->groupBy('movies.category_id')
+//     // ->orderBy('movies.category_id')
+//     ->get();
+// return var_dump($collection[0]);
 Route::view('/', 'home', ['movieCollection' => $result]);
 Route::get('/register', [FormController::class, 'register']);
 Route::post('/register', [FormController::class, 'submitRegister']);

@@ -26,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
         DB::listen(function (QueryExecuted $query) {
             Log::info($query->sql);
         });
+        DB::statement("SET SQL_MODE= ''");
     }
 }

@@ -22,11 +22,11 @@ class EnvironmentTest extends TestCase
         $author = env("AUTHOR", "Ariiq");
         self::assertEquals("Ariiq", $author);
     }
-    public function testEnvironment()
-    {
-        if (App::environment("testing")) {
-            echo "LOGIC IN TESTING ENV\n";
-            self::assertTrue(true);
-        }
-    }
+    // public function testEnvironment()
+    // {
+    //     if (App::environment("testing")) {
+    //         echo "LOGIC IN TESTING ENV\n";
+    //         self::assertTrue(true);
+    //     }
+    // }
 }

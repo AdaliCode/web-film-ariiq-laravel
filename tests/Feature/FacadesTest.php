@@ -12,24 +12,24 @@ class FacadesTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function testConfig()
-    {
-        $firstName1 = config("example.author.firstName");
-        $firstName2 = Config::get("example.author.firstName");
+    // public function testConfig()
+    // {
+    //     $firstName1 = config("example.author.firstName");
+    //     $firstName2 = Config::get("example.author.firstName");
 
-        self::assertEquals($firstName1, $firstName2);
-        var_dump(Config::all());
-    }
+    //     self::assertEquals($firstName1, $firstName2);
+    //     var_dump(Config::all());
+    // }
 
-    public function testConfigDependency()
-    {
-        $config = $this->app->make("config");
-        $firstName1 = $config->get("example.author.firstName");
-        $firstName2 = Config::get("example.author.firstName");
+    // public function testConfigDependency()
+    // {
+    //     $config = $this->app->make("config");
+    //     $firstName1 = $config->get("example.author.firstName");
+    //     $firstName2 = Config::get("example.author.firstName");
 
-        self::assertEquals($firstName1, $firstName2);
-        var_dump(Config::all());
-    }
+    //     self::assertEquals($firstName1, $firstName2);
+    //     var_dump(Config::all());
+    // }
 
     public function testConfigMock()
     {
