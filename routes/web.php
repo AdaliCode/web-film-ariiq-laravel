@@ -37,12 +37,12 @@ use Illuminate\Support\Facades\URL;
 //     //     "type" => "Film"
 //     // ],
 // ]);
-$collection = DB::table('movies')
-    ->join('categories', 'movies.category_id', '=', 'categories.id')
-    ->select('movies.id', 'movies.title', 'categories.name as category_name', 'movies.price')->get();
-$result = $collection->mapToGroups(function ($item) {
-    return [$item->category_name => ["title" => $item->title]];
-});
+// $collection = DB::table('movies')
+//     ->join('categories', 'movies.category_id', '=', 'categories.id')
+//     ->select('movies.id', 'movies.title', 'categories.name as category_name', 'movies.price')->get();
+// $result = $collection->mapToGroups(function ($item) {
+//     return [$item->category_name => ["title" => $item->title]];
+// });
 // Route::get('/coba', function () {
 //     $collection = DB::table('movies')
 //         ->join('categories', 'movies.category_id', '=', 'categories.id')
@@ -58,7 +58,7 @@ $result = $collection->mapToGroups(function ($item) {
 //     // ->orderBy('movies.category_id')
 //     ->get();
 // return var_dump($collection[0]);
-Route::view('/', 'home', ['movieCollection' => $result]);
+// Route::view('/', 'home', ['movieCollection' => $result]);
 Route::get('/register', [FormController::class, 'register']);
 Route::post('/register', [FormController::class, 'submitRegister']);
 Route::get('/login', [FormController::class, 'login']);

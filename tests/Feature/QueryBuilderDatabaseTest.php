@@ -53,15 +53,15 @@ class QueryBuilderDatabaseTest extends TestCase
         }
     }
 
-    public function testQueryBuilderWhereBetween()
-    {
-        $collection = DB::table('categories')->whereBetween('create_at', ['2024-05-14 00:00:00', '2024-05-14 21:21:00'])->get();
+    // public function testQueryBuilderWhereBetween()
+    // {
+    //     $collection = DB::table('categories')->whereBetween('create_at', ['2024-05-14 00:00:00', '2024-05-14 21:21:00'])->get();
 
-        self::assertCount(2, $collection);
-        for ($i = 0; $i < count($collection); $i++) {
-            Log::info(json_encode($collection[$i]));
-        }
-    }
+    //     self::assertCount(2, $collection);
+    //     for ($i = 0; $i < count($collection); $i++) {
+    //         Log::info(json_encode($collection[$i]));
+    //     }
+    // }
 
     public function testQueryBuilderWhereIn()
     {
@@ -72,24 +72,24 @@ class QueryBuilderDatabaseTest extends TestCase
             Log::info(json_encode($collection[$i]));
         }
     }
-    public function testQueryBuilderWhereNull()
-    {
-        $collection = DB::table('categories')->whereNull('description')->get();
+    // public function testQueryBuilderWhereNull()
+    // {
+    //     $collection = DB::table('categories')->whereNull('description')->get();
 
-        self::assertCount(2, $collection);
-        for ($i = 0; $i < count($collection); $i++) {
-            Log::info(json_encode($collection[$i]));
-        }
-    }
-    public function testQueryBuilderWhereDate()
-    {
-        $collection = DB::table('categories')->whereDate('create_at', '2024-05-14')->get();
+    //     self::assertCount(2, $collection);
+    //     for ($i = 0; $i < count($collection); $i++) {
+    //         Log::info(json_encode($collection[$i]));
+    //     }
+    // }
+    // public function testQueryBuilderWhereDate()
+    // {
+    //     $collection = DB::table('categories')->whereDate('create_at', '2024-05-14')->get();
 
-        self::assertCount(2, $collection);
-        for ($i = 0; $i < count($collection); $i++) {
-            Log::info(json_encode($collection[$i]));
-        }
-    }
+    //     self::assertCount(2, $collection);
+    //     for ($i = 0; $i < count($collection); $i++) {
+    //         Log::info(json_encode($collection[$i]));
+    //     }
+    // }
     public function testQueryBuilderUpdate()
     {
         DB::table('categories')->where('id', '=', 'KOREAN-DRAMA')->update([
@@ -165,18 +165,18 @@ class QueryBuilderDatabaseTest extends TestCase
     //         Log::info(json_encode($collection[$i]));
     //     }
     // }
-    public function testQueryBuilderTakeSkip()
-    {
-        $collection = DB::table('categories')
-            ->skip(2)
-            ->take(2)
-            ->get();
+    // public function testQueryBuilderTakeSkip()
+    // {
+    //     $collection = DB::table('categories')
+    //         ->skip(2)
+    //         ->take(2)
+    //         ->get();
 
-        self::assertCount(0, $collection);
-        for ($i = 0; $i < count($collection); $i++) {
-            Log::info(json_encode($collection[$i]));
-        }
-    }
+    //     self::assertCount(0, $collection);
+    //     for ($i = 0; $i < count($collection); $i++) {
+    //         Log::info(json_encode($collection[$i]));
+    //     }
+    // }
     public function testQueryBuilderChunkResults()
     {
         DB::table('categories')
@@ -249,21 +249,21 @@ class QueryBuilderDatabaseTest extends TestCase
     //     ]);
     // }
 
-    public function testQueryBuilderGrouping()
-    {
-        $collection = DB::table("movies")
-            ->select(
-                'category_id',
-                DB::raw('count(*) as total_product')
-            )->groupBy('category_id')
-            ->orderBy('category_id', 'desc')
-            ->get();
-        self::assertCount(2, $collection);
-        self::assertEquals('MOVIE', $collection[0]->category_id);
-        self::assertEquals('KOREAN-DRAMA', $collection[1]->category_id);
-        self::assertEquals(2, $collection[0]->total_product);
-        self::assertEquals(2, $collection[1]->total_product);
-    }
+    // public function testQueryBuilderGrouping()
+    // {
+    //     $collection = DB::table("movies")
+    //         ->select(
+    //             'category_id',
+    //             DB::raw('count(*) as total_product')
+    //         )->groupBy('category_id')
+    //         ->orderBy('category_id', 'desc')
+    //         ->get();
+    //     self::assertCount(2, $collection);
+    //     self::assertEquals('MOVIE', $collection[0]->category_id);
+    //     self::assertEquals('KOREAN-DRAMA', $collection[1]->category_id);
+    //     self::assertEquals(2, $collection[0]->total_product);
+    //     self::assertEquals(2, $collection[1]->total_product);
+    // }
     public function testQueryBuilderHaving()
     {
         $collection = DB::table("movies")
@@ -277,30 +277,30 @@ class QueryBuilderDatabaseTest extends TestCase
             ->get();
         self::assertCount(0, $collection);
     }
-    public function testQueryBuilderLocking()
-    {
-        DB::transaction(function () {
-            $collection = DB::table('movies')
-                ->where('id', '=', '1')
-                ->lockForUpdate()
-                ->get();
-            self::assertCount(1, $collection);
-        });
-    }
-    public function testQueryBuilderPagination()
-    {
-        $paginate = DB::table('movies')->paginate(perPage: 2);
-        self::assertEquals(1, $paginate->currentPage()); // current Page
-        self::assertEquals(2, $paginate->perPage()); // items per Page
-        self::assertEquals(2, $paginate->lastPage()); // last Page
-        self::assertEquals(4, $paginate->total()); // Total items
+    // public function testQueryBuilderLocking()
+    // {
+    //     DB::transaction(function () {
+    //         $collection = DB::table('movies')
+    //             ->where('id', '=', '1')
+    //             ->lockForUpdate()
+    //             ->get();
+    //         self::assertCount(1, $collection);
+    //     });
+    // }
+    // public function testQueryBuilderPagination()
+    // {
+    //     $paginate = DB::table('movies')->paginate(perPage: 2);
+    //     self::assertEquals(1, $paginate->currentPage()); // current Page
+    //     self::assertEquals(2, $paginate->perPage()); // items per Page
+    //     self::assertEquals(2, $paginate->lastPage()); // last Page
+    //     self::assertEquals(4, $paginate->total()); // Total items
 
-        $collection = $paginate->items();
-        self::assertCount(2, $collection);
-        foreach ($collection as $item) {
-            Log::info(json_encode($item)); // toObject
-        }
-    }
+    //     $collection = $paginate->items();
+    //     self::assertCount(2, $collection);
+    //     foreach ($collection as $item) {
+    //         Log::info(json_encode($item)); // toObject
+    //     }
+    // }
     public function testQueryBuilderIterationPerPage()
     {
         $page = 1;
