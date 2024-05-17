@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use App\Models\Cast;
 use App\Models\Catagory;
 use App\Models\Comment;
+use App\Models\Scopes\IsActiveScope;
+use Database\Seeders\CastSeeder;
 use Database\Seeders\CategorySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -172,15 +174,42 @@ class EloquentTest extends TestCase
     //     $category = Catagory::query()->create($request);
     //     self::assertNotNull($category->id);
     // }
-    public function testUpdateModel()
+    // public function testUpdateModel()
+    // {
+    //     $request = [
+    //         'name' => 'Action Updated',
+    //         'description' => 'Action Category Updated'
+    //     ];
+    //     $category = Catagory::query()->find('ACTION');
+    //     $category->fill($request);
+    //     $category->save();
+    //     self::assertNotNull($category->id);
+    // }
+    public function testSoftDelete()
     {
-        $request = [
-            'name' => 'Action Updated',
-            'description' => 'Action Category Updated'
-        ];
-        $category = Catagory::query()->find('ACTION');
-        $category->fill($request);
-        $category->save();
-        self::assertNotNull($category->id);
+        $this->seed(CastSeeder::class);
+        $cast = Cast::query()->where('name', 'Sample Cast')->first();
+        $cast->delete();
+        $cast = Cast::query()->where('name', 'Sample Cast')->first();
+        self::assertNull($cast);
+    }
+    // public function testRemoveGlobalScope()
+    // {
+    //     $category = new Catagory();
+    //     $category->id = "HORROR";
+    //     $category->name = "Horror";
+    //     $category->description = "Horror Category";
+    //     $category->is_active = false;
+    //     $category->save();
+    //     self::assertNull($category);
+    // }
+
+    public function testShutdownGlobalScope()
+    {
+        $category = Catagory::query()->find("HORROR");
+        self::assertNull($category);
+
+        $category = Catagory::query()->withoutGlobalScopes([IsActiveScope::class])->find("HORROR");
+        self::assertNotNull($category);
     }
 }

@@ -8,6 +8,9 @@ use App\Http\Controllers\InputController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\SessionController;
+use App\Models\Cast;
+use App\Models\Catagory;
+use App\Models\Movie;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\RouteRegistrar;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +18,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 
+use function PHPUnit\Framework\isEmpty;
 
 // $movieCollection = collect([
 //     [
@@ -59,6 +63,11 @@ use Illuminate\Support\Facades\URL;
 //     ->get();
 // return var_dump($collection[0]);
 // Route::view('/', 'home', ['movieCollection' => $result]);
+Route::get('/coba', function () {
+    $categories = Catagory::all();
+    var_dump($categories);
+    // var_dump(isEmpty(Catagory::class));
+});
 Route::get('/register', [FormController::class, 'register']);
 Route::post('/register', [FormController::class, 'submitRegister']);
 Route::get('/login', [FormController::class, 'login']);
