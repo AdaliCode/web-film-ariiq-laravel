@@ -64,8 +64,8 @@ use function PHPUnit\Framework\isEmpty;
 // return var_dump($collection[0]);
 // Route::view('/', 'home', ['movieCollection' => $result]);
 Route::get('/coba', function () {
-    $categories = Catagory::all();
-    var_dump($categories);
+    $categories = Cast::query()->active()->count();
+    print_r($categories);
     // var_dump(isEmpty(Catagory::class));
 });
 Route::get('/register', [FormController::class, 'register']);

@@ -212,4 +212,16 @@ class EloquentTest extends TestCase
         $category = Catagory::query()->withoutGlobalScopes([IsActiveScope::class])->find("HORROR");
         self::assertNotNull($category);
     }
+
+    // public function testLocalScope()
+    // {
+    //     $cast = new Cast();
+    //     $cast->name = "Kim Hye Yoon";
+    //     $cast->is_active = true;
+    //     $cast->save();
+    //     $total = Cast::query()->active()->count();
+    //     self::assertEquals(1, $total);
+    //     $total = Cast::query()->nonActive()->count();
+    //     self::assertEquals(0, $total);
+    // }
 }

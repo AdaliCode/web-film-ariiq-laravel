@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('movies', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('casts', function (Blueprint $table) {
+            //
+            $table->boolean('is_active')->nullable()->default(true);
         });
     }
 
@@ -22,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('movies');
+        Schema::table('casts', function (Blueprint $table) {
+            $table->dropColumn('is_active');
+            //
+        });
     }
 };
