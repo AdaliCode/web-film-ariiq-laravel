@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Catagory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -21,5 +22,11 @@ class CategorySeeder extends Seeder
             ->insert(['id' => 'KOREAN-DRAMA', 'name' => 'Korean Drama', 'create_at' => '2024-05-15 09:50:10']);
         DB::table('categories')
             ->insert(['id' => 'VARIETY-SHOW', 'name' => 'Variety Show', 'create_at' => '2024-05-15 09:51:10']);
+
+        $category = new Catagory();
+        $category->id = "HORROR";
+        $category->name = "Horror";
+        $category->description = "Horror Category";
+        $category->save();
     }
 }

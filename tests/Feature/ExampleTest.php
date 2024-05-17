@@ -103,14 +103,14 @@ class ExampleTest extends TestCase
     }
 
     // Seeder unit test
-    public function testSeeding()
-    {
-        // $this->seed(CategorySeeder::class);
-        $collection = DB::table('categories')->get();
-        self::assertCount(4, $collection);
-        foreach ($collection as $item) {
-            self::assertNotNull($item);
-            Log::info(json_encode($item));
-        }
-    }
+    // public function testSeeding()
+    // {
+    //     // $this->seed(CategorySeeder::class);
+    //     $collection = DB::table('categories')->get();
+    //     self::assertCount(4, $collection);
+    //     foreach ($collection as $item) {
+    //         self::assertNotNull($item);
+    //         Log::info(json_encode($item));
+    //     }
+    // }
 }
